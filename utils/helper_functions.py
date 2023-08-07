@@ -8,6 +8,11 @@ from tqdm.notebook import tqdm
 
 
 def get_all_frames_from_videos_in_directory():
+
+    """This function will return all the frames in the video
+     from directory as a LIST with a length as the multiple of provided sequence length, ie disregards
+     the remaining frames"""
+
     all_frames = []
 
     files_in_directory = de.get_normal_files_in_directory()
@@ -41,19 +46,21 @@ def get_all_frames_from_videos_in_directory():
             num_sequences = frames_length // sequence_length
             video_frames = video_frames[:num_sequences * sequence_length]
             all_frames.extend(video_frames)
-            video_frames = []
 
         return all_frames
 
 
 def get_dataset_in_sequences():
-    # defining the frame list and a sequence length
+    """This function is used only for model training as it is a GENERATOR for
+    proper utilization of GPU using TensorFlow"""
 
+    # defining the frame list and a sequence length
     all_frames_in_videos = get_all_frames_from_videos_in_directory()
     frames_list = all_frames_in_videos
 
     size = len(frames_list)
     sequence_length = 10
+
     for i in range(0, size, sequence_length):
         sequence_frames = frames_list[i: i + sequence_length]
 
@@ -64,3 +71,15 @@ def get_dataset_in_sequences():
                 clip[j] = frame
 
             yield clip, clip
+
+
+def get_frame_sequence_tracker(frames_in_batches):
+    """This function will return a DICTIONARY with key as the sequence order number
+    and value as the sequence itself"""
+
+    frame_sequence_tracker = {}
+
+    for count,frame_sequence in enumerate(frames_in_batches):
+        frame_sequence_tracker[count + 1] = frame_sequence
+
+    return frame_sequence_tracker
