@@ -28,14 +28,16 @@ def perform_change_detection(all_frames_in_batches_dict):
     return key_list
 
 
-def get_significant_change_frames(average_frames_tracker, threshold=0.05):
+def get_significant_change_frames(average_frames_tracker, threshold=0.002):
     """This function will return the frames with significant changes"""
 
     significant_change_key_list = []
 
     for i in range(1, len(average_frames_tracker)):
         frame_difference = average_frames_tracker[i] - average_frames_tracker[i + 1]
+        # print(np.mean(frame_difference))
         if np.mean(frame_difference) > threshold:
             significant_change_key_list.append(i)
 
     return significant_change_key_list
+

@@ -6,6 +6,7 @@ import numpy as np
 import cv2
 from tqdm.notebook import tqdm
 import matplotlib.pyplot as plt
+import logging
 
 
 def get_all_frames_from_videos_in_directory():
@@ -145,5 +146,58 @@ def display_image(image):
     plt.show()
 
 
-def test_func():
-    print('hello world')
+def get_insignificant_frame(significant_keys):
+    """ This function returns insignificant keys by taking
+     significant keys as input """
+
+    insignificant_keys = []
+
+    for k in range(1, significant_keys[0]):
+        if k not in significant_keys:
+            insignificant_keys.append(k)
+            break  # Only one value is required
+
+    # If the first value is significant, proceeding till the end
+    if len(insignificant_keys) == 0:
+        logging.info('Empty Insignificant Key')
+        for k in range(1, significant_keys[-1]):
+            if k not in significant_keys:
+                insignificant_keys.append(k)
+                break  # Only one value is required
+
+    return insignificant_keys
+
+
+def get_reconstruction_cost(original_sequence, predicted_sequence):
+    cost = np.linalg.norm(original_sequence - predicted_sequence[0])
+    return cost
+
+
+def get_max_from_cost_dict(cost_dict):
+    cost_max = 0
+
+    for key, value in cost_dict.items():
+        if value > cost_max:
+            cost_max = value
+    return cost_max
+
+
+def get_anomaly_threshold_from_normal_cost(cost):
+    five_percent_cost = 0.05 * cost
+    anomaly_threshold = five_percent_cost + cost
+    return anomaly_threshold
+
+
+def get_values_from_dictionary(dict_data):
+    value_list = []
+    for index, value in dict_data.items():
+        value_list.append(value)
+    return value_list
+
+
+def calculate_prediction_cost_threshold(cost_list):
+    mean_cost = np.mean(cost_list)
+    logging.info(f'Mean is {mean_cost}')
+    std_cost = np.std(cost_list)
+    cost_threshold = mean_cost
+    return cost_threshold
