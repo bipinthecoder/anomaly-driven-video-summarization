@@ -1,0 +1,1 @@
+This folder is where all videos run on this pipeline is saved.
