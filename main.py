@@ -31,6 +31,11 @@ frame_sequence_tracker = hf.get_frame_sequence_tracker(frames_in_batches)
 # Performing change detection to extract significant frame sequence keys
 significant_keys = cd.perform_change_detection(frame_sequence_tracker)
 
+# Exiting if no significant motion was detected
+if not significant_keys:
+    logging.info('No potential anomaly found in video')
+    exit()
+
 # Getting one insignificant entry to check normal prediction score
 insignificant_keys = hf.get_insignificant_frame(significant_keys)
 
