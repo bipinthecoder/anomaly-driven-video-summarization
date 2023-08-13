@@ -16,9 +16,6 @@ logging.getLogger().setLevel(logging.INFO)
 anomaly_video_file_path = Config.TO_PROCESS_VIDEO_FILE_PATH
 file_name = anomaly_video_file_path.split('/')[-1].split('.')[0]
 
-# Loading the Fine Tuned Keras Model
-model = tf.keras.models.load_model(Config.FINE_TUNED_LSTM_AUTO_ENCODER_PATH)
-
 # Extracting the frames from video
 video_frames_dict = hf.get_frames_from_video(anomaly_video_file_path)
 
@@ -37,6 +34,9 @@ if not significant_keys:
 
 # Getting one insignificant entry to check normal prediction score
 insignificant_keys = hf.get_insignificant_frame(significant_keys)
+
+# Loading the Fine Tuned Keras Model
+model = tf.keras.models.load_model(Config.FINE_TUNED_LSTM_AUTO_ENCODER_PATH)
 
 # Checking the prediction value of insignificant frame
 insig_cost_tracker = {}
