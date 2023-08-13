@@ -33,8 +33,7 @@ significant_keys = cd.perform_change_detection(frame_sequence_tracker)
 
 # Exiting if no significant motion was detected
 if not significant_keys:
-    logging.info('No potential anomaly found in video')
-    exit()
+    hf.no_anomaly_detected()
 
 # Getting one insignificant entry to check normal prediction score
 insignificant_keys = hf.get_insignificant_frame(significant_keys)
@@ -95,6 +94,10 @@ if len(keys_to_consider) == 0:
     for index, cost in cost_tracker.items():
         if cost > cost_threshold:
             keys_to_consider.add(index)
+
+# Exiting if no prediction cost cross the threshold
+if not keys_to_consider:
+    hf.no_anomaly_detected()
 
 # Fetching all frame keys in a list
 frame_key_list = vshf.get_frame_key_list(keys_to_consider)

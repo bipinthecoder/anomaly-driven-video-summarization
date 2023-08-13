@@ -201,3 +201,8 @@ def calculate_prediction_cost_threshold(cost_list):
     std_cost = np.std(cost_list)
     cost_threshold = mean_cost
     return cost_threshold
+
+
+def no_anomaly_detected():
+    logging.info('No potential anomaly found in video')
+    exit()
