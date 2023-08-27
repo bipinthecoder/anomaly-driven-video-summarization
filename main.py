@@ -1,8 +1,5 @@
-import cv2
 import tensorflow as tf
-import matplotlib.pyplot as plt
 import numpy as np
-import os
 import logging
 
 from utils import helper_functions as hf
@@ -60,7 +57,9 @@ for key in insignificant_keys:
 max_insignificant_prediction_score = hf.get_max_from_cost_dict(insig_cost_tracker)
 
 # calculating anomaly threshold
-anomaly_threshold = hf.get_anomaly_threshold_from_normal_cost(max_insignificant_prediction_score)
+cut_off_threshold_percent = 4
+anomaly_threshold = hf.get_anomaly_threshold_from_normal_cost(max_insignificant_prediction_score,
+                                                              cut_off_threshold_percent)
 
 # Significant frames cost tracker
 cost_tracker = {}

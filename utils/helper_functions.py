@@ -182,9 +182,10 @@ def get_max_from_cost_dict(cost_dict):
     return cost_max
 
 
-def get_anomaly_threshold_from_normal_cost(cost):
-    five_percent_cost = 0.05 * cost
-    anomaly_threshold = five_percent_cost + cost
+def get_anomaly_threshold_from_normal_cost(cost, cut_off_percent):
+    percent = cut_off_percent / 100
+    percent_cost = percent * cost
+    anomaly_threshold = percent_cost + cost
     return anomaly_threshold
 
 
