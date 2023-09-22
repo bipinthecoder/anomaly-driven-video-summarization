@@ -17,10 +17,12 @@ logging.getLogger().setLevel(logging.INFO)
 anomaly_video_file_path = Config.TO_PROCESS_VIDEO_FILE_PATH
 file_name = anomaly_video_file_path.split('/')[-1].split('.')[0]
 
-logging.info(f'processing {file_name}')
+logging.info(f'processing video file: {file_name}')
 
 # Extracting the frames from video
 video_frames_dict = hf.get_frames_from_video(anomaly_video_file_path)
+
+logging.info(f'Number of Frames in Input Video : {len(video_frames_dict)}')
 
 # Grouping frames into batches of 30, since fps=30
 frames_in_batches = hf.get_frames_in_batches(30, video_frames_dict)
@@ -89,8 +91,10 @@ cost_list = hf.get_values_from_dictionary(cost_tracker)
 # Cost list for K-means clustering
 k_means_cost_list = np.array(cost_list).reshape(-1, 1)
 
-# Initializing with 2 clusters: Anomaly and Non Anomaly
-kmeans = KMeans(n_clusters=2)
+# Initializing with 'number_of_clusters' clusters: Anomaly and Non Anomaly
+number_of_clusters = Config.NUMBER_OF_CLUSTERS
+
+kmeans = KMeans(n_clusters=number_of_clusters)
 kmeans.fit(k_means_cost_list)
 
 labels = kmeans.labels_
@@ -105,16 +109,17 @@ anomalous_center = max(cluster_centers)
 anomalies = [cost for cost, label in zip(k_means_cost_list, labels) if cluster_centers[label] == anomalous_center]
 
 # Assuming the video is not anomalous
-anomalous_video = False
+# anomalous_video = False
 
 for anomaly_cost in anomalies:
     for key, value in cost_tracker.items():
         if value == anomaly_cost:
-            if value > anomaly_threshold:
-                anomalous_video = True
+            # if value > anomaly_threshold:
+            #     anomalous_video = True
             keys_to_consider.add(key)
 
-if not anomalous_video or not keys_to_consider:
+# if not anomalous_video or not keys_to_consider:
+if not keys_to_consider:
     hf.no_anomaly_detected()
 
 # Fetching all frame keys in a list
@@ -128,7 +133,7 @@ original_frames_for_summarization = \
     vshf.get_original_frames_for_summarization(final_frames_key_list=final_frames_key_list,
                                                original_frames_dict=video_frames_dict)
 
-logging.info(f'Original Frames for Summarization: {len(original_frames_for_summarization)}')
+logging.info(f'Number of Frames in Output Video: {len(original_frames_for_summarization)}')
 
 save_frames_as_video = \
     vshf.save_summarized_frames_as_video(file_name=file_name,
