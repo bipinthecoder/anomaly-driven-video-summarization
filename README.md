@@ -95,5 +95,17 @@ This project evaluates the effectiveness of the final architecture by considerin
 - Set up the config.py file by proving the right path to relevant files. Suggested value of NUMBER_OF_CLUSTERS is 3 for UCF-crime dataset.
 - The entry point of execution is main_cluster_based.py and hence the command `python main_cluster_based.py` will perform video summarization.
 - The output video will be present in the directory specified as `TO_SAVE_DIRECTORY` in the `config.py` file.
+## Remarks and Open Issues
+
+### Initial Approach and its future scope
+- The file `main.py` contains an approach that utilizes potentially non-anomlaous frames to come up with a threshold value for frames flagged as anomalous.
+- In the future this method could be developed by adding feedback loops and a has a scope for improvement.
+### Limitations
+- This architecture does not do well on subtle human crime anomalies like Pickpocketing, Shoplifting etc
+- This can be overcome by training the model on more videos and by improvising on this architecture.
+  
+## Acknowlegements
+- The pre-trained LSTM Autoencoder trained on <a href="http://www.svcl.ucsd.edu/projects/anomaly/dataset.htm">USCD Pedestrian Dataset</a> was obtained from the GitHub public repo : https://github.com/hashemsellat/video-anomaly-detection/tree/master
+- The script for plotting the Pareto front was obtained from the GitHub public repo: https://github.com/Mohamed-Zeghlache/Pareto-frontier
 
 
