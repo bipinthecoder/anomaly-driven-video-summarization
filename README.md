@@ -3,6 +3,10 @@
 ## Objective
 Perform video summarization on lengthy CCTV footage focused on public crimes.
 
+## Dataset Used:
+
+**UCF-Crime Dataset** : https://www.crcv.ucf.edu/projects/real-world/
+
 ## Highlights
 
 - Efficiently summarizes large videos around crime anomalies present in the UCF-crime dataset when tested on a small-scale
