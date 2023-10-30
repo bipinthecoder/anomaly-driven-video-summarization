@@ -43,7 +43,7 @@ The figure below shows the architecture of the adopted LSTM-based pre-trained Au
 
 ### 3. CBT (Clustering-Based Technique)
 
-K-means clustering is performed on the selected anomalies for categorizing critical anoamlies without any manual intervention.
+K-means clustering is performed on the selected anomalies for categorizing critical anomalies without any manual intervention.
 
 <img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/5547c9ad-4a7d-4bbd-95ce-fb27c2c3643f">
 
@@ -90,25 +90,25 @@ This module performs video summarization on selected frames by combining some of
 </table>
 
 ## Evaluation
-This project evaluates the effectiveness of the final architecture by considering the SSIM (Structural Similarity Index Method), IP (Inclusion Percentile of Anomalies), Compactness Measure and G-mean value. A multi-objective evaluation technique like Pareto Front is also proposed for evaluating the architecture. This has not been incorporated into the repository but will be clearly explained in a paper published in future.
+This project evaluates the effectiveness of the final architecture by considering the SSIM (Structural Similarity Index Method), IP (Inclusion Percentile of Anomalies), Compactness Measure and G-mean value. A multi-objective evaluation technique like Pareto Front is also utilized for evaluating the architecture. This has not been incorporated into the repository but will be clearly explained in a paper published in future.
 
 ## How to Run the project
 
 - Clone the repository
-- Create a Virtual Env using conda from the environment.yml file : `conda env create -f environment.yml`
-- Set up the config.py file by proving the right path to relevant files. Suggested value of NUMBER_OF_CLUSTERS is 3 for UCF-crime dataset.
-- The entry point of execution is main_cluster_based.py and hence the command `python main_cluster_based.py` will perform video summarization.
-- The output video will be present in the directory specified as `TO_SAVE_DIRECTORY` in the `config.py` file.
+- Create a Virtual Env using conda from the environment.yml file: `conda env create -f environment.yml`
+- Set up the config.py file by providing the right path to relevant files. The suggested value of NUMBER_OF_CLUSTERS is 3 for the UCF-crime dataset.
+- The execution entry point is main_cluster_based.py, and hence the command `python main_cluster_based.py` will perform video summarization.
+- The output video will be in the directory specified as `TO_SAVE_DIRECTORY` in the `config.py` file.
 ## Remarks and Open Issues
 
 ### Initial Approach and its future scope
-- The file `main.py` contains an approach that utilizes potentially non-anomlaous frames to come up with a threshold value for frames flagged as anomalous.
-- In the future this method could be developed by adding feedback loops and a has a scope for improvement.
+- The file `main.py` contains an approach that utilizes potentially non-anomalous frames to create a threshold value for frames flagged as anomalous.
+- In the future, this method could be developed by adding feedback loops with a scope for improvement.
 ### Limitations
-- This architecture does not do well on subtle human crime anomalies like Pickpocketing, Shoplifting etc
-- This can be overcome by training the model on more videos and by improvising on this architecture.
+- This architecture does not do well on subtle human crime anomalies like Pickpocketing, Shoplifting, etc
+- This can be overcome by training the model on more videos and improvising on this architecture.
   
-## Acknowlegements
+## Acknowledgements
 - The pre-trained LSTM Autoencoder trained on <a href="http://www.svcl.ucsd.edu/projects/anomaly/dataset.htm">USCD Pedestrian Dataset</a> was obtained from the GitHub public repo : https://github.com/hashemsellat/video-anomaly-detection/tree/master
 - The script for plotting the Pareto front was obtained from the GitHub public repo: https://github.com/Mohamed-Zeghlache/Pareto-frontier
 
