@@ -99,13 +99,18 @@ This project evaluates the effectiveness of the final architecture by considerin
 - Set up the config.py file by providing the right path to relevant files. The suggested value of NUMBER_OF_CLUSTERS is 3 for the UCF-crime dataset.
 - The execution entry point is main_cluster_based.py, and hence the command `python main_cluster_based.py` will perform video summarization.
 - The output video will be in the directory specified as `TO_SAVE_DIRECTORY` in the `config.py` file.
-## Remarks and Open Issues
 
+## File Structure
 ### Models
 All the models associated with this project are in the directory `/models`. The final fine-tuned model selected for the architecture after several tests is `auto_encoder5.hdf5`.
 
 ### Notebooks
 All the associated Notebooks are in the directory `/notebooks`. All the model training, visualization and unit testing were performed in the respective notebooks. The notebooks, however, are not properly cleaned and hence have minimal readability.
+
+### Utils
+All the separate module functions and repetitively used helper functions are written in respective files and stored in the `/utils` directory.
+
+## Remarks and Open Issues
 
 ### Initial Approach and its future scope
 - The file `main.py` contains an approach that utilizes potentially non-anomalous frames to create a threshold value for frames flagged as anomalous.
