@@ -15,13 +15,15 @@ Perform video summarization on lengthy CCTV footage focused on public crimes.
 
 The figure below shows the algorithm's effectiveness when tested on a few randomly chosen videos from the UCF-crime dataset.
 
-<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/0ab0a8f7-bad4-4b55-9244-ba6911f7e981">
+<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/9522578e-94d1-4df1-bf2e-4bfd0c700e46">
+
 
 ## Proposed Architecture
 
 The final architecture followed in the project is shown below:
 
-<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/58a541e6-6af7-4182-bc17-88a314d9b8bd">
+<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/8ac6a2b4-52fd-41a5-bc54-682a077e2d97">
+
 
 ## Stages of the Architecture
 
@@ -31,7 +33,8 @@ This module identifies the frames undergoing significant changes in the scene an
 
 The figure below illustrates the operations happening in the CDM module:
 
-<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/b46be0b9-9c49-4570-9c5b-e3835c761178">
+<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/10ccedd1-f216-474c-88bf-3e2ffc60a7d1">
+
 
 ### 2. ADM (Anomaly Detection Module)
 
@@ -39,13 +42,15 @@ This module identifies the crime anomalies happening in the scenes and passes th
 
 The figure below shows the architecture of the adopted LSTM-based pre-trained Autoencoder fine-tuned on the UCF-crime dataset:
 
-<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/d4ba4476-6882-4c05-b8ab-73e700a23012">
+<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/5680e64c-ce40-4a09-8ff5-eb0650295aca">
+
 
 ### 3. CBT (Clustering-Based Technique)
 
 K-means clustering is performed on the selected anomalies for categorizing critical anomalies without any manual intervention.
 
-<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/5547c9ad-4a7d-4bbd-95ce-fb27c2c3643f">
+<img width="700" alt="image" src="https://github.com/bipinthecoder/anomaly-driven-video-summarization/assets/37789083/e6b43358-63fb-4d88-98a7-8f5105438d6b">
+
 
 
 ### 4. VSM (Video Summarization Module)
